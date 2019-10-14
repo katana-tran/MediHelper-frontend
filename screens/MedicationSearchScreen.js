@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import { TextInput, Text, View, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import SearchBox from '../components/SearchBox'
-import MedicationsContainer from '../containers/MedicationsContainer';
-import MedicationModal from '../components/MedicationModal'
+import SearchContainer from '../containers/SearchContainer';
 
 export default function MedicationSearchScreen() {
   return (
@@ -16,11 +15,10 @@ export default function MedicationSearchScreen() {
             </Text>
             <SearchBox/>      
         </View>
-            <MedicationModal/>
             <Text style={styles.text}>
                 Results
             </Text>
-            <MedicationsContainer/>
+            <SearchContainer/>
     </View>
     </View>
 </TouchableWithoutFeedback>

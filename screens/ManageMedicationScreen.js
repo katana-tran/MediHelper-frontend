@@ -1,21 +1,22 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { Text, ScrollView, StyleSheet } from 'react-native';
+import MedicationsContainer from '../containers/MedicationsContainer';
+import ContraindicationButton from '../components/ContraindicationButton'
+import ContraindicationsContainer from '../containers/ContraindicationsContainer';
 
-export default function LinksScreen() {
+export default function ManageMedicationScreen() {
   return (
     <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
+        <Text>My Medications</Text>
+        <MedicationsContainer/>
+        <ContraindicationButton/>
+        <ContraindicationsContainer/>
     </ScrollView>
   );
 }
 
-LinksScreen.navigationOptions = {
-  title: 'Links',
+ManageMedicationScreen.navigationOptions = {
+  title: 'Manage',
 };
 
 const styles = StyleSheet.create({

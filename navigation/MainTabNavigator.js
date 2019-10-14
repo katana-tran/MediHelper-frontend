@@ -3,11 +3,14 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import MedicationSearchScreen from '../screens/MedicationSearchScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import ManageMedicationScreen from '../screens/ManageMedicationScreen';
+import Colors from '../constants/Colors';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -24,14 +27,12 @@ const HomeStack = createStackNavigator(
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
+    <AntDesign
+    name="home"
+    size={26}
+    style={{ marginBottom: -3}}
+    color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+  />
   ),
 };
 
@@ -79,34 +80,44 @@ const ManageMedicationStack = createStackNavigator(
 ManageMedicationStack.navigationOptions = {
   tabBarLabel: 'Manage',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-pizza' : 'md-pizza'} />
+    <MaterialCommunityIcons
+      name="pill"
+      size={26}
+      style={{ marginBottom: -3}}
+      color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+    />
   ),
 };
 
 ManageMedicationStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const ProfileStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Profile: ProfileScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <AntDesign
+    name="user"
+    size={26}
+    style={{ marginBottom: -3}}
+    color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+  />
   ),
 };
 
-SettingsStack.path = '';
+ProfileStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  MedicationSearchStack,
   ManageMedicationStack,
+  MedicationSearchStack,
   LinksStack,
-  SettingsStack
+  ProfileStack
 });
 
 tabNavigator.path = '';

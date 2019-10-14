@@ -1,5 +1,6 @@
 const initialState = {
-    medications: []
+    medications: [],
+    usersMedications: []
   }
   
   const MedicationReducer = (state=initialState, action) => {
@@ -7,7 +8,13 @@ const initialState = {
     switch(action.type) {
       case 'GET_MEDICATIONS':
         return {
-          medications: action.payload
+          ...state,
+          medications: action.payload        
+        }
+      case 'GET_USERS_MEDS':
+        return {
+          ...state,
+          usersMedications: action.payload
         }
       default:
         return state;

@@ -16,7 +16,7 @@ class SearchBox extends Component {
         this.setState((prevState) => ({
             ...prevState,
             searchTerm: text
-        }), () => console.log(this.state))
+        }))
     }
 
     handleSubmit = () => {
@@ -33,12 +33,11 @@ class SearchBox extends Component {
             })
         })
         .then(res => res.json())
-        .then(medications_json => {
-            this.props.setMedicationSearch(medications_json)
+        .then(medications_results => {
+            this.props.setMedicationSearch(medications_results)
         })
         .catch(err => {
             console.log("Error in Fetching Medications:", err)
-            debugger
         })
 
     }
@@ -67,7 +66,7 @@ class SearchBox extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setMedicationSearch: medication_json => dispatch(setMedicationSearch(medication_json))
+        setMedicationSearch: medications_results => dispatch(setMedicationSearch(medications_results))
     }
 }
 
