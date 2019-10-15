@@ -3,17 +3,13 @@ import { View, Text, StyleSheet } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Button } from 'react-native-elements'
 import MedicationModal from './MedicationModal'
-import { connect } from 'react-redux'
-import { BASE_URL } from '../redux/actions/WorkingURL'
-import { setUserMedication } from '../redux/actions/medication.actions'
-
 
 class MedicationCard extends Component{
 
     constructor(){
         super()
         this.state ={
-          isVisible: true
+          isVisible: false
         }
     }
 
@@ -24,30 +20,20 @@ class MedicationCard extends Component{
     }
 
     handleOnPress = () =>{
-        fetch(BASE_URL+"/medications", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                userID: 1,
-                medication: this.props.medication
-            })
+        this.setState({
+            isVisible: true
         })
-        .then(response => response.json())
-        .then(user_medications => this.props.setUserMedication(user_medications))
     }
 
     modalView = () => {
-        return this.state.isVisible? <MedicationModal onToggle={this.toggleModal}/> : null
+        return this.state.isVisible? <MedicationModal medication={this.props.medication} onToggle={this.toggleModal}/> : null
     }
     
     render(){
         return(
             <>
             <View style={styles.view}>
-                {/* {this.modalView()} */}
+                {this.modalView()}
                 <Button
                 onPress={this.handleOnPress}
                 type="outline"
@@ -61,11 +47,7 @@ class MedicationCard extends Component{
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        setUserMedication: user_medications => dispatch(setUserMedication(user_medications))
-    }
-}
+
 
 const styles = StyleSheet.create({
     view: {
@@ -80,4 +62,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(null, mapDispatchToProps)(MedicationCard)
+export default MedicationCard

@@ -25,7 +25,7 @@ class ContraindicationCard extends Component{
             <>
             <View style={styles.view}>
                 <MaterialCommunityIcons color={this.state.color}name="pill"/>
-                {/* <Text>{firstDrug.name} and {secondDrug.name}</Text> */}
+                <Text>{firstDrug.name} and {secondDrug.name}</Text>
                 <Text>{contraindication}</Text>
             </View>
             </>

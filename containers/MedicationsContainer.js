@@ -23,7 +23,7 @@ class MedicationsContainer extends Component {
                 "Content-Type":"application/json"
             },
             body: JSON.stringify ({
-                userID: 1
+                userID: this.props.user.id
             })
         }).then(response => response.json())
         .then(user_medications => {
@@ -48,7 +48,8 @@ class MedicationsContainer extends Component {
 const mapStateToProps = state => {
     console.log("state.MedicationReducer from medicationsContainer", state.MedicationReducer)
     return{
-        usersMedications: state.MedicationReducer.usersMedications
+        usersMedications: state.MedicationReducer.usersMedications,
+        user: state.UserReducer.user
     }
 }
 

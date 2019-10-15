@@ -13,7 +13,7 @@ class ContraindicationButton extends Component {
                 "Content-Type":"application/json"
             },
             body: JSON.stringify({
-                user_id: 1
+                user_id: this.props.user.id
             })
         })
         .then(res => res.json())
@@ -37,4 +37,10 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ContraindicationButton)
+const mapStateToProps = state => {
+    return{
+      user: state.UserReducer.user
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContraindicationButton)

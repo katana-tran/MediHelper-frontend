@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import { BASE_URL } from '../redux/actions/WorkingURL'
 import { setUserMedication } from '../redux/actions/medication.actions'
 
-class MedicationModal extends Component{
-  handleMedicationInfo = () => {
+class MedicationInfoModal extends Component{
+  handleDeleteMedicationInfo = () => {
     this.props.onToggle()
-    fetch(BASE_URL+"/medications", {
+    fetch(BASE_URL+"/delete-medication", {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -30,23 +30,23 @@ class MedicationModal extends Component{
       onBackdropPress={() => this.props.onToggle()}
       isVisible={true}>
           <Text>"Hello!!!!"</Text>
-          <Button title="Add to My Medications" onPress={this.handleMedicationInfo}/>
+          <Button title="Delete this Medication" onPress={this.handleDeleteMedicationInfo}/>
       </Overlay>
     )
   }
 }
 
 const mapStateToProps = state => {
-  console.log("state from medicationModal", state)
-  return{
-    user: state.UserReducer.user
-  }
+    console.log("state from medicationInfoModal", state)
+    return{
+        user: state.UserReducer.user
+    }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUserMedication: user_medications => dispatch(setUserMedication(user_medications))
+      setUserMedication: user_medications => dispatch(setUserMedication(user_medications))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicationModal)
+export default connect(mapStateToProps, mapDispatchToProps)(MedicationInfoModal)

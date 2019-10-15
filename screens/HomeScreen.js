@@ -11,13 +11,15 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import AuthService from '../components/AuthService'
+import ProfileCard from '../containers/ProfileCard'
+import { Divider } from 'react-native-elements'
+import MedicationReminderContainer from '../containers/MedicationReminderContainer';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
+      <View>
         <View style={styles.welcomeContainer}>
           <Image
             source={
@@ -27,7 +29,21 @@ export default function HomeScreen() {
             }
             style={styles.welcomeImage}
           />
+          <Text>MediHelper</Text>
         </View>
+      </View>
+
+      <Divider style={{ backgroundColor: 'orange' }}/>
+
+      <View style={styles.container}>
+        <ProfileCard/>
+        <AuthService/>
+      </View>
+
+      <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
+        <MedicationReminderContainer/>
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
@@ -92,6 +108,12 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     paddingHorizontal: 4,
   },
+    medicationButton: {
+        borderWidth: 1,
+        borderColor: 'gray',
+        padding: 1,
+        margin: 5
+    },
   getStartedText: {
     fontSize: 17,
     color: 'rgba(96,100,109, 1)',

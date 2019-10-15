@@ -25,6 +25,9 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "facebookScheme": "fb528529677714454",
+    "facebookDisplayName": "MediHelper",
+    "facebookAppId": "528529677714454"
   }
 }
