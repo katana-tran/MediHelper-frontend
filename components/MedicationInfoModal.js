@@ -27,9 +27,9 @@ class MedicationInfoModal extends Component{
   render(){
     return(
       <Overlay
+      animationType="slide"
       onBackdropPress={() => this.props.onToggle()}
       isVisible={true}>
-          <Text>"Hello!!!!"</Text>
           <Button title="Delete this Medication" onPress={this.handleDeleteMedicationInfo}/>
       </Overlay>
     )

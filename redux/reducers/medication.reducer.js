@@ -1,6 +1,6 @@
 const initialState = {
-    medications: [],
-    usersMedications: []
+    medications: [1],
+    usersMedications: [1]
   }
   
   const MedicationReducer = (state=initialState, action) => {

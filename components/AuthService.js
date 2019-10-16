@@ -4,6 +4,8 @@ import { TouchableOpacity, StyleSheet, Text } from 'react-native'
 import { BASE_URL } from '../redux/actions/WorkingURL'
 import { connect } from 'react-redux'
 import { setUser } from '../redux/actions/user.actions'
+import { Button } from 'react-native-elements'
+import { FontAwesome } from '@expo/vector-icons'
 
 class AuthService extends Component {
 
@@ -27,7 +29,7 @@ class AuthService extends Component {
         })
         .then(response => response.json())
         .then(user_json => {
-            console.log(user_json)
+            console.log(user_json, this.props)
             this.props.setUser(user_json)
         })
     }
@@ -50,6 +52,7 @@ class AuthService extends Component {
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`).then(response => response.json()).then(response => this.getUserData(response.id,token))
 
             alert('Logged in!');
+            this.props.signIn()
         } else {
             alert('Please sign in to continue!')
         }
@@ -61,13 +64,28 @@ class AuthService extends Component {
     render(){
         return (
         <>
-        <TouchableOpacity
-            onPress={() => this.FacebookLogin()} 
+        {/* <TouchableOpacity
+            
             style={styles.medicationButton}>
                 <Text>Facebook</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+
+        <Button
+        onPress={() => this.FacebookLogin()} 
+        icon={
+            <FontAwesome size={25} color="white" name="facebook-official"/>
+        }
+        iconLeft
+        title="Facebook Signin"
+        />
         </>
         )
+    }
+}
+
+const mapDispatchToProps = dispatch =>{
+    return{
+        setUser: userData => dispatch(setUser(userData))
     }
 }
 
@@ -84,10 +102,5 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapDispatchToProps = dispatch =>{
-    return{
-        setUser: userData => dispatch(setUser(userData))
-    }
-}
 
 export default connect(null, mapDispatchToProps)(AuthService)

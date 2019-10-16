@@ -15,22 +15,21 @@ class MedicationsContainer extends Component {
 
     }
 
-    componentWillMount = () => {
-        console.log("about to fetch from componentDidMount in MedicationsContainer")
-        fetch(BASE_URL + "/get-users-medications", {
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify ({
-                userID: this.props.user.id
-            })
-        }).then(response => response.json())
-        .then(user_medications => {
-            this.props.setUserMedication(user_medications)
-            this.handleGenerateMedicationCards()
-        })
-    }
+    // componentWillMount = () => {
+    //     console.log("about to fetch from componentDidMount in MedicationsContainer")
+    //     fetch(BASE_URL + "/get-users-medications", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type":"application/json"
+    //         },
+    //         body: JSON.stringify ({
+    //             userID: this.props.user.id
+    //         })
+    //     }).then(response => response.json())
+    //     .then(user_medications => {
+    //         this.props.setUserMedication(user_medications)
+    //     })
+    // }
 
     render(){
         return(
@@ -53,11 +52,11 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return{
-    setUserMedication: user_medications => dispatch(setUserMedication(user_medications))
-    }
-}
+// const mapDispatchToProps = dispatch => {
+//     return{
+//     setUserMedication: user_medications => dispatch(setUserMedication(user_medications))
+//     }
+// }
 
 const styles = StyleSheet.create({
     saveButton: {
@@ -72,4 +71,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicationsContainer)
+export default connect(mapStateToProps, null)(MedicationsContainer)

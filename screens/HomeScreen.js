@@ -1,4 +1,4 @@
-import * as WebBrowser from 'expo-web-browser';
+
 import React from 'react';
 import {
   Image,
@@ -6,12 +6,10 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
-import AuthService from '../components/AuthService'
 import ProfileCard from '../containers/ProfileCard'
 import { Divider } from 'react-native-elements'
 import MedicationReminderContainer from '../containers/MedicationReminderContainer';
@@ -37,14 +35,13 @@ export default function HomeScreen() {
 
       <View style={styles.container}>
         <ProfileCard/>
-        <AuthService/>
-      </View>
 
       <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}>
         <MedicationReminderContainer/>
       </ScrollView>
+      </View>
 
       <View style={styles.tabBarInfoContainer}>
         <Text style={styles.tabBarInfoText}>

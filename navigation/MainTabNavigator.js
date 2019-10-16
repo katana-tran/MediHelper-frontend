@@ -6,7 +6,6 @@ import TabBarIcon from '../components/TabBarIcon';
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
 import MedicationSearchScreen from '../screens/MedicationSearchScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ManageMedicationScreen from '../screens/ManageMedicationScreen';
@@ -37,22 +36,6 @@ HomeStack.navigationOptions = {
 };
 
 HomeStack.path = '';
-
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
-);
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
-
-LinksStack.path = '';
 
 const MedicationSearchStack = createStackNavigator(
   {
@@ -114,9 +97,8 @@ ProfileStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  ManageMedicationStack,
   MedicationSearchStack,
-  LinksStack,
+  ManageMedicationStack,
   ProfileStack
 });
 

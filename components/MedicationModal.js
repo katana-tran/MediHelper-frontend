@@ -27,6 +27,7 @@ class MedicationModal extends Component{
   render(){
     return(
       <Overlay
+      animationType='slide'
       onBackdropPress={() => this.props.onToggle()}
       isVisible={true}>
           <Text>"Hello!!!!"</Text>
