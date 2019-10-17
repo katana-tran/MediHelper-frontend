@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { Button } from 'react-native-elements'
+import { Button, Tooltip } from 'react-native-elements'
 
 class ContraindicationCard extends Component{
 
@@ -23,11 +23,12 @@ class ContraindicationCard extends Component{
         const { contraindication, firstDrug, secondDrug, severity} = this.props.contraindication
         return(
             <>
-            <View style={styles.view}>
-                <MaterialCommunityIcons color={this.state.color}name="pill"/>
-                <Text>{firstDrug.name} and {secondDrug.name}</Text>
-                <Text>{contraindication}</Text>
-            </View>
+            <Tooltip height={100} width={300} backgroundColor={this.state.color} popover={<Text>{contraindication}</Text>}>
+                <View style={styles.view}>
+                    <MaterialCommunityIcons color={this.state.color}name="pill"/>
+                    <Text>{firstDrug.name} and {secondDrug.name}</Text>
+                </View>
+            </Tooltip>
             </>
         )
     }

@@ -51,7 +51,7 @@ class AuthService extends Component {
             // Get the user's name using Facebook's Graph API
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`).then(response => response.json()).then(response => this.getUserData(response.id,token))
 
-            alert('Logged in!');
+            console.log('Logged in!');
             this.props.signIn()
         } else {
             alert('Please sign in to continue!')
