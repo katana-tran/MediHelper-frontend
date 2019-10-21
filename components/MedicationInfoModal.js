@@ -3,7 +3,7 @@ import { Overlay, Button, Image, Avatar, Card, Icon } from 'react-native-element
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { BASE_URL } from '../redux/actions/WorkingURL'
-import { setUserMedication } from '../redux/actions/medication.actions'
+import { setUserMedication } from '../redux/actions/user.actions'
 import MyCamera from './MyCamera'
 import { FontAwesome } from '@expo/vector-icons'
 

@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { BASE_URL } from '../redux/actions/WorkingURL'
-import { setUserMedication } from '../redux/actions/medication.actions'
+import { setUserMedication } from '../redux/actions/user.actions'
 
 class ProfileCard extends Component{
 
@@ -56,7 +56,7 @@ const mapStateToProps = state => {
     console.log("state from medicationModal", state)
     return{
       user: state.UserReducer.user,
-      medications: state.MedicationReducer.usersMedications
+      medications: state.UserReducer.usersMedications
     }
 }
 

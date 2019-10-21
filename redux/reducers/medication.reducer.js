@@ -1,6 +1,6 @@
 const initialState = {
     medications: [1],
-    usersMedications: [1]
+    filterTerm: ""
   }
   
   const MedicationReducer = (state=initialState, action) => {
@@ -11,11 +11,13 @@ const initialState = {
           ...state,
           medications: action.payload        
         }
-      case 'GET_USERS_MEDS':
+      case 'SET_FILTER_TERM':
         return {
           ...state,
-          usersMedications: action.payload
+          filterTerm: action.payload
         }
+      case 'CLEAR_SEARCH':
+        return initialState
       default:
         return state;
     }

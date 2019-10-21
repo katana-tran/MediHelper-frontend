@@ -94,13 +94,15 @@ export default class MyCamera extends React.Component {
                     />}>
               </Button>
 
-              {/* <Button
-              type="clear"
+              <Button
+              type="solid"
+              buttonStyle={{color:"black"}}
               icon={<Ionicons
-                name={this.state.flashMode == Camera.Constants.FlashMode.off ? "md-flash" : 'md-flash-off'}
+                name={this.state.flashMode == Camera.Constants.FlashMode.off ? 'md-flash-off' : "md-flash" }
                 color="white"
                 size={60}
               />}
+              title={this.state.flashMode === Camera.Constants.FlashMode.off? "Off" : "On"}
               onPress={() => {
                 this.setState({
                   flashMode:
@@ -108,7 +110,8 @@ export default class MyCamera extends React.Component {
                       ? Camera.Constants.FlashMode.on
                       : Camera.Constants.FlashMode.off,
                 })}}>
-                </Button> */}
+              </Button>
+
           </View>
          
             </View>

@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
-import ProfileCard from '../containers/ProfileCard'
+import ProfileCard from '../components/ProfileCard'
 import { Divider } from 'react-native-elements'
 import MedicationReminderContainer from '../containers/MedicationReminderContainer';
+import UserNotifications from '../components/UserNotifications'
 
 export default function HomeScreen() {
   return (
@@ -35,7 +36,7 @@ export default function HomeScreen() {
 
       <View style={styles.container}>
         <ProfileCard/>
-
+        <UserNotifications/>
       <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}>

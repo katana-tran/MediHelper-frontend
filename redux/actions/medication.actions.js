@@ -1,17 +1,22 @@
 
-export const setUserMedication = medications => {
-    console.log("SET USER",medications)
+export const setFilterTerm = filterTerm => {
     return {
-        type: "GET_USERS_MEDS",
-        payload: medications
+        type: "SET_FILTER_TERM",
+        payload: filterTerm
     }
 }
-
 
 export const setMedicationSearch = medications => {
     console.log("SET SEARCH",medications)
     return {
         type: "GET_MEDICATIONS",
         payload: medications
+    }
+}
+
+export const clearSearchResults = () => {
+    console.log("CLEARING MEDICATIONS STATE")
+    return {
+        type: "CLEAR_SEARCH"
     }
 }

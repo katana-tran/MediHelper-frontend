@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { TextInput, Text, View, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import SearchBox from '../components/SearchBox'
 import SearchContainer from '../containers/SearchContainer';
+import SearchToFilterContainer from '../containers/SearchToFilterContainer';
 
 export default function MedicationSearchScreen() {
   return (
@@ -9,15 +10,7 @@ export default function MedicationSearchScreen() {
     <View style={{flex: 1}}>
         <TextInput keyboardType='numeric'/>
     <View style={styles.container}>
-        <View style={styles.box} >
-            <Text style={styles.text}>
-                Medication Search
-            </Text>
-            <SearchBox/>      
-        </View>
-            <Text style={styles.text}>
-                Results
-            </Text>
+            <SearchToFilterContainer/>
             <SearchContainer/>
     </View>
     </View>
@@ -40,17 +33,4 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-    text: {
-        color: 'gray',
-        fontSize: 24,
-        padding: 10,
-    },
-    box: {
-      width: 300,
-      height: 150,
-      backgroundColor: 'pink',
-      borderWidth: 1,
-      borderColor: 'gray',
-      borderRadius: 20,
-    }
   })

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { BASE_URL } from '../redux/actions/WorkingURL'
-import { setUserMedication } from '../redux/actions/medication.actions'
+import { setUserMedication } from '../redux/actions/user.actions'
 import MedicationInfoCard from '../components/MedicationInfoCard'
 
 class MedicationsContainer extends Component {
@@ -47,7 +47,7 @@ class MedicationsContainer extends Component {
 const mapStateToProps = state => {
     console.log("state.MedicationReducer from medicationsContainer", state.MedicationReducer)
     return{
-        usersMedications: state.MedicationReducer.usersMedications,
+        usersMedications: state.UserReducer.usersMedications,
         user: state.UserReducer.user
     }
 }
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
         },
     scrollView: {
         backgroundColor: 'white',
+        margin: 10
     }
 })
 

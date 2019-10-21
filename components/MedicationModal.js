@@ -3,7 +3,7 @@ import { Overlay, Button } from 'react-native-elements'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
 import { BASE_URL } from '../redux/actions/WorkingURL'
-import { setUserMedication } from '../redux/actions/medication.actions'
+import { setUserMedication } from '../redux/actions/user.actions'
 
 class MedicationModal extends Component{
   handleMedicationInfo = () => {

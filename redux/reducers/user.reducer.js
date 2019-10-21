@@ -1,4 +1,5 @@
 const initialState = {
+    usersMedications: [1],
     user: {
         name: "Friend"
     }
@@ -11,6 +12,11 @@ const UserReducer = (state=initialState, action) => {
                 ...state,
                 user: action.payload
             }
+        case 'GET_USERS_MEDS':
+                return {
+                    ...state,
+                    usersMedications: action.payload
+                }
         default:
             return state
     }
