@@ -41,14 +41,14 @@ class SearchContainer extends Component {
         return(
             <>
             {this.showResultsTag()}
+            <View style={{backgroundColor:'white', flex:1}}>
             <ScrollView 
             directionalLockEnabled='true'
             contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>
-                <View>
-                    {this.handleGenerateMedicationCards()}
-                </View>
+            style={styles.scrollView}>   
+                {this.handleGenerateMedicationCards()}
             </ScrollView>
+            </View>
             </>
         )
     }
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
         },
     scrollView: {
         backgroundColor: 'white',
-        margin: "5%"
+        margin: "5%",
+        flexGrow: 1
     },
     text: {
         color: 'gray',

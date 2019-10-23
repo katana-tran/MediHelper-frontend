@@ -29,7 +29,6 @@ class ProfileCard extends Component{
             <Card title={ 
                 <ListItem
                 leftAvatar={{
-                    title: name[0],
                     source: { uri: this.props.user.img_url }
                 }}
                 title={<Text h3>Hey, {this.props.user.name}</Text>}
