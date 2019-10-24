@@ -16,15 +16,18 @@ class SearchBox extends Component {
         return(
             <View>
                 <Input
+                leftIconContainerStyle={{marginRight: 7, marginLeft:-1}}
                 leftIcon={<AntDesign
                     name="search1"
-                    size={18}
+                    size={20}
+                    color='white'
                   />}
                 platform="ios"
                 autoCapitalize="none" 
                 onBlur={Keyboard.dismiss}
                 onChangeText={text => this.handleTextChange(text)}
                 value={this.props.filterTerm} 
+                color="white"
                 placeholder="Type to filter results" 
                 style={styles.input}
                 /> 

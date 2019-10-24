@@ -13,19 +13,23 @@ class ContraindicationCard extends Component{
     }
 
     componentWillMount(){
-        let severity_color = this.props.contraindication.severity == "high"? "red" : "yellow"
+        let severity_color = this.props.contraindication.severity == "high"? "red" : "#ffa255"
         this.setState({
             color: severity_color
         })
     }
 
     render(){
-        const { contraindication, firstDrug, secondDrug } = this.props.contraindication
+        const { contraindication, firstDrug, secondDrug, severity } = this.props.contraindication
         return(
             <Tooltip height={100} width={300} backgroundColor={this.state.color} popover={<Text>{contraindication}</Text>}>
-                <View>
-                    <MaterialCommunityIcons color={this.state.color}name="pill"/>
-                    <Text>{firstDrug.name} and {secondDrug.name}</Text>
+                <View style={{paddingLeft: 5, marginHorizontal: 10, marginBottom:10, paddingBottom:5, borderWidth:1, borderColor: 'teal', borderRadius:5}}>
+                    <View style={{ marginTop:5, flex: 1, flexDirection:'row'}}>
+                        <MaterialCommunityIcons color={this.state.color}name="pill"/>
+                        <Text>Severity: {severity.toUpperCase()}</Text>
+                    </View>
+                    <Text>{firstDrug.name}</Text>
+                    <Text>{secondDrug.name}</Text>
                 </View>
             </Tooltip>
         )

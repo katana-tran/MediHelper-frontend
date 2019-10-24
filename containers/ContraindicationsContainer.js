@@ -13,7 +13,7 @@ class ContraindicationsContainer extends Component {
         }
     }
     createContraindicationCards = () => {
-        let contraindications_array = this.props.contraindications?  this.props.contraindications : []
+        let contraindications_array = this.props.contraindications?  this.props.contraindications.reverse() : []
         
         return contraindications_array.map((contraindication, index) => 
         {
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     scrollView: {
         marginTop: 10,
         marginHorizontal: 10,
+        marginBottom: 20
     },
 });
 

@@ -37,10 +37,15 @@ class MedicationCard extends Component{
                 <Button
                 onPress={this.handleOnPress}
                 type="outline"
+                title={this.props.medication.name}
                 raised={true}
-                icon={<MaterialCommunityIcons color="orange" name="pill"/>}
+                containerStyle={{marginBottom:5}}
+                buttonStyle={{backgroundColor:'#ec700a'}}
+                titleStyle={{fontWeight:'500', color: 'white', fontSize: 18, 
+                textShadowColor: 'black',
+                textShadowOffset: {width: -1, height: 1},
+                textShadowRadius: 5 }}
                 />
-                <Text>{this.props.medication.name}</Text>
             </View>
             </>
         )
@@ -51,8 +56,7 @@ class MedicationCard extends Component{
 
 const styles = StyleSheet.create({
     view: {
-        flex:1,
-        flexDirection:'row'
+        flex:1
     },
     medicationButton: {
         borderWidth: 1,

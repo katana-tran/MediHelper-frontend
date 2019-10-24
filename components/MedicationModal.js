@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Overlay, Button, Card } from 'react-native-elements'
-import { Text, Picker, TextInput, DatePickerIOS, View, StyleSheet, Keyboard } from 'react-native'
+import { Text, Picker, TextInput, DatePickerIOS, View, StyleSheet, Keyboard, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { BASE_URL } from '../redux/actions/WorkingURL'
 import { setUserMedication } from '../redux/actions/user.actions'
@@ -85,11 +85,11 @@ class MedicationModal extends Component{
     console.log(this.state)
     return this.state.showDateTimePicker?
     <Overlay
-      height="40%"
+      height="38%"
       width="90%"
       onBackdropPress={() => this.setStateStartTimePicker()}
       isVisible={true}>
-        <Text>When would you like to start receiving notifications?</Text>
+        <Text style={styles.textPicker}>When would you like to start receiving notifications?</Text>
         <DatePickerIOS
           mode="datetime"
           date={this.state.notificationStartDate}
@@ -108,11 +108,11 @@ class MedicationModal extends Component{
   showTimesADayPicker = () => {
     return this.state.showTimesADayPicker?
     <Overlay
-      height="40%"
+      height="38%"
       width="90%"
       onBackdropPress={() => this.setStateTimesADayPicker()}
       isVisible={true}>
-        <Text>How many times per day will you take this medication?</Text>
+        <Text style={styles.textPicker}>How many times per day will you take this medication?</Text>
         <View>
           <Picker
             selectedValue={this.state.repeatIntervalTime}
@@ -135,11 +135,11 @@ class MedicationModal extends Component{
   showFrequencyPicker = () => {
     return this.state.showFrequencyPicker?
     <Overlay
-      height="40%"
+      height="38%"
       width="90%"
       onBackdropPress={() => this.setStateFrequencyPicker()}
       isVisible={true}>
-        <Text>How often will you take this medication?</Text>
+        <Text style={styles.textPicker}>How often will you take this medication?</Text>
         <View>
           <Picker
             selectedValue={this.state.repeatIntervalDays}
@@ -182,6 +182,7 @@ class MedicationModal extends Component{
   render(){
     return(
       <Overlay
+      overlayStyle={{borderRadius:5}}
       height="90%"
       width="90%"
       onPress={() => this.setStateTimePicker()}
@@ -194,6 +195,7 @@ class MedicationModal extends Component{
           <Text>Type: {this.props.medication.type}</Text>
         </Card>          
 
+        <View style={styles.twoInputField}>
           {/* Calculating the amount of dosages remaining before the next needed refill by amt pills/etc remaining/dose */}
           <Text>Amount of capsules/applications/syringes remaining:</Text>
           <TextInput
@@ -214,36 +216,41 @@ class MedicationModal extends Component{
               value={this.state.amountUsedPerDose} 
               placeholder="usage/dose" 
               style={styles.input}/>  
-          
-          {/* Date Picker for when the user wants the first notification to pop up and the subsequent time they will pop up each day. */}
-          <Text>Start Notifications At: (Tap date to change)</Text>
-          <Text 
-            onPress={() => this.setState((prevState) => ({
-              ...prevState,
-              showDateTimePicker: true
-            }))}>{this.state.notificationStartDate.toString()}</Text>
-          {this.showDateTimePicker()}
+          </View>
 
-          <Text>How many times daily would you like reminders?: (Tap date to change)</Text>
-          <Text 
-              onPress={() => this.setState((prevState) => ({
-                ...prevState,
-                showTimesADayPicker: true
-              }))}>{this.state.repeatIntervalTime} time(s) a day.</Text>
-            {this.showTimesADayPicker()}
+          {/* Date Picker for when the user wants the first notification to pop up and the subsequent time they will pop up each day. */}
+          <TouchableOpacity onPress={() => this.setState((prevState) => ({
+            ...prevState,
+            showDateTimePicker: true
+          }))} style={styles.selectorWithPicker}>
+            <Text style={styles.textPicker}>Start Notifications At: (Tap to change)</Text>
+            <Text style={{textAlign: 'center', fontSize:15, marginTop:2}}>{this.state.notificationStartDate.toString()}</Text>
+            {this.showDateTimePicker()}
+          </TouchableOpacity>
 
           {/* Picker for amount of times a day a user would like to use their medication. Once => q24 hours, twice => q12, etc. */}
-          <Text>How frequently would you like reminders?: (Tap date to change)</Text>
-          <View style={styles.pickerHours}>
-            <Text 
-              onPress={() => this.setState((prevState) => ({
-                ...prevState,
-                showFrequencyPicker: true
-              }))}>Frequency: {this.state.repeatIntervalDays}</Text>
-            {this.showFrequencyPicker()}
-         </View>
-  
-            <Button title="Add to My Medications" onPress={this.screenMedicationsForInput}/>  
+          <TouchableOpacity onPress={() => this.setState((prevState) => ({
+            ...prevState,
+            showFrequencyPicker: true
+          }))}
+            style={styles.selectorWithPicker}>
+            <Text style={styles.textPicker}>How frequently would you like reminders?: (Tap to change)</Text>
+              <Text style={{textAlign: 'center', fontSize:15}}>Frequency: {this.state.repeatIntervalDays}</Text>
+              {this.showFrequencyPicker()}
+         </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.setState((prevState) => ({
+            ...prevState,
+            showTimesADayPicker: true
+          }))}
+          style={styles.selectorWithPicker}>
+            <Text style={styles.textPicker}>How many times would you like reminders on those days?: (Tap to change)</Text>
+            <Text style={{textAlign: 'center', fontSize:15}}>{this.state.repeatIntervalTime} time(s) a day.</Text>
+              {this.showTimesADayPicker()}
+          </TouchableOpacity>
+
+            <Button containerStyle={{position: 'absolute',
+      bottom: 5, left: 5, right: 5,}} title="Add to My Medications" onPress={this.screenMedicationsForInput}/>  
       </Overlay>
     )
   }
@@ -265,9 +272,7 @@ const mapDispatchToProps = dispatch => {
 
 const styles = StyleSheet.create({
   pickerHours: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    flex: 1
   },
   input: { 
       backgroundColor:"whitesmoke", 
@@ -275,6 +280,18 @@ const styles = StyleSheet.create({
       borderColor: 'gray', 
       borderWidth: 1,
       margin: 5
+  },
+  twoInputField: {
+    marginTop: 30,
+    marginBottom: 50
+  },
+  selectorWithPicker: {
+    marginBottom: 30
+  },
+  textPicker: {
+    fontSize: 20,
+    fontWeight: '500',
+    textAlign: 'center'
   }
 })
 

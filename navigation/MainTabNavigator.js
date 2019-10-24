@@ -29,7 +29,7 @@ HomeStack.navigationOptions = {
     <AntDesign
     name="home"
     size={26}
-    style={{ marginBottom: -3}}
+    style={{ marginTop: 10, marginBottom: -3}}
     color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
   />
   ),
@@ -66,7 +66,7 @@ ManageMedicationStack.navigationOptions = {
     <MaterialCommunityIcons
       name="pill"
       size={26}
-      style={{ marginBottom: -3}}
+      style={{ marginTop: 10, marginBottom: -3}}
       color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
     />
   ),
@@ -87,7 +87,7 @@ ContraindicationStack.navigationOptions = {
     <AntDesign
     name="warning"
     size={26}
-    style={{ marginBottom: -3}}
+    style={{ marginTop: 10, marginBottom: -3}}
     color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
   />
   ),

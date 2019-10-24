@@ -7,24 +7,32 @@ import ContraindicationsContainer from '../containers/ContraindicationsContainer
 
 export default function ManageMedicationScreen() {
   return (
-    <View>
-        <Text h3 style={styles.title}>My Medications</Text>
+    <View style={styles.container}>
+        <Text h2 style={styles.title}>My Medications</Text>
+        <Text style={{marginBottom: 10, color:'white', marginHorizontal:10}}>Check current medications and add a picture to them to remember what they looked like before taking your medication!</Text> 
         <MedicationsContainer/>
     </View>
   );
 }
 
 ManageMedicationScreen.navigationOptions = {
-  title: 'Manage',
+  header: null,
 };
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#007077',
     flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
+    alignItems: 'center',
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'white',
+    marginTop: 60,
+    fontWeight: '500',
+    textShadowColor: 'black',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 5,
+    marginBottom: 20
   }
-});
+})

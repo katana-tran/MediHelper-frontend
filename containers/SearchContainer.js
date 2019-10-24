@@ -34,14 +34,14 @@ class SearchContainer extends Component {
     }
 
     areResultsPresent = () => {
-        return this.props.resultsAvailable? <Text style={{fontStyle:'italic'}}>Displaying results for "{this.props.searchTerm}".</Text> : <Text style={{fontStyle:'italic'}}>No results were found for "{this.props.searchTerm}".</Text>
+        return this.props.resultsAvailable? <Text style={styles.resultText}>Displaying results for "{this.props.searchTerm}".</Text> : <Text style={styles.resultText}>No results were found for "{this.props.searchTerm}".</Text>
     }
 
     render(){
         return(
             <>
             {this.showResultsTag()}
-            <View style={{backgroundColor:'white', flex:1}}>
+            <View style={{backgroundColor:'#007077', flex:1}}>
                 <ScrollView 
                 directionalLockEnabled='true'
                 contentInsetAdjustmentBehavior="automatic"
@@ -73,14 +73,21 @@ const styles = StyleSheet.create({
         margin: 10
         },
     scrollView: {
-        backgroundColor: 'white',
+        backgroundColor: '#007077',
         margin: "5%",
         flexGrow: 1
     },
     text: {
-        color: 'gray',
-        fontSize: 24,
+        color: 'white',
+        fontSize: 28,
         padding: 10,
+        marginTop: -7,
+        textAlign: 'center'
+    },
+    resultText: {
+        fontStyle:'italic',
+        color: 'white',
+        fontSize: 15
     }
 })
 

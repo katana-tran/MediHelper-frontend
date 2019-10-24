@@ -15,9 +15,9 @@ class AuthScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-            source={{ uri: "https://media.giphy.com/media/l2JBygxaUuh8aJ6YHn/giphy.gif" }}
+            source={{ uri: "https://i.stack.imgur.com/LOwyR.png" }}
             style={styles.Image}>
-        <Text h1 style={styles.titleText}>MediHelper</Text>
+        <Text style={styles.title}>MediHelper</Text>
         <Text style={styles.titleText}>Your one-stop shop medication tracker</Text>
         {/* <Card style={styles.Card}>
             <Text h4 style={{fontFamily: 'Arial',}}>Signin by Facebook</Text> */}
@@ -52,13 +52,23 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center'
   },
+  title: {
+    color: "white",
+    textShadowColor: 'white',
+    textAlign: 'center',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10, 
+    fontFamily: 'Arial',
+    fontSize: 70
+  },
   titleText: {
     color: "white",
     textShadowColor: 'white',
     textAlign: 'center',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10, 
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    fontSize: 18
   },
 });
 

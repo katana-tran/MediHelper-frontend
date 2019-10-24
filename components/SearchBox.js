@@ -48,9 +48,11 @@ class SearchBox extends Component {
         return(
             <View>
                 <Input
+                leftIconContainerStyle={{marginRight: 7, marginLeft:-1}}
                 leftIcon={<AntDesign
                     name="search1"
-                    size={18}
+                    size={20}
+                    style={{marginRight: 1}}
                   />}
                 autoCapitalize="none" 
                 onBlur={Keyboard.dismiss}
@@ -63,7 +65,7 @@ class SearchBox extends Component {
                 style={styles.saveButton}
                 onPress={this.handleSubmit}
                 >
-                <Text style={styles.saveButtonText}>Go!</Text>
+                    <Text style={styles.saveButtonText}>Go!</Text>
                 </TouchableHighlight>
             </View>
         )
@@ -86,17 +88,19 @@ const styles = StyleSheet.create({
     },
     saveButton: {
         borderWidth: 1,
-        borderColor: 'gray',
-        backgroundColor: 'gray',
+        borderColor: 'orange',
+        backgroundColor: 'orange',
         padding: 2,
-        margin: 10
+        marginHorizontal: 10,
+        marginTop: 20,
+        borderRadius: 5
         },
     container: {
         borderWidth: 1
     },
     saveButtonText: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 25,
         textAlign: 'center'
         }
   })

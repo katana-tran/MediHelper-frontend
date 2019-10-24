@@ -85,7 +85,7 @@ export default class MyCamera extends React.Component {
 
               <Button
               type="solid"
-              buttonStyle={{color:"black"}}
+              buttonStyle={{backgroundColor:"teal"}}
               onPress={this.snapPicture.bind(this)}
               icon={<Entypo
                         name="camera"
@@ -95,8 +95,9 @@ export default class MyCamera extends React.Component {
               </Button>
 
               <Button
+              containerStyle={{marginLeft:10}}
               type="solid"
-              buttonStyle={{color:"black"}}
+              buttonStyle={{backgroundColor:"teal"}}
               icon={<Ionicons
                 name={this.state.flashMode == Camera.Constants.FlashMode.off ? 'md-flash-off' : "md-flash" }
                 color="white"

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { Button } from 'react-native-elements'
+import { Button, ListItem } from 'react-native-elements'
 import MedicationInfoModal from '../components/MedicationInfoModal'
 
 class MedicationInfoCard extends Component{
@@ -35,14 +35,17 @@ class MedicationInfoCard extends Component{
             <View style={styles.view}>
             {this.modalView()}
                 <Button
-                type="outline"
                 onPress={this.handleOnPress}
+                type="outline"
+                title={this.props.medication.name}
                 raised={true}
-                icon={<MaterialCommunityIcons color="orange" name="pill"/>}
+                containerStyle={{marginBottom:5}}
+                buttonStyle={{backgroundColor:'#ec700a', borderRadius: 10}}
+                titleStyle={{fontWeight:'500', color: 'white', fontSize: 18, 
+                textShadowColor: 'black',
+                textShadowOffset: {width: -1, height: 1},
+                textShadowRadius: 5 }}
                 />
-                <Text
-                style={{marginLeft: 5, marginTop: 5}}>
-                {this.props.medication.name}</Text>
             </View>
             </>
         )
@@ -51,8 +54,8 @@ class MedicationInfoCard extends Component{
 
 const styles = StyleSheet.create({
     view: {
-        flex:1,
-        flexDirection:'row',
+        // flex:1,
+        // flexDirection:'row',
         marginBottom: 5
     },
     medicationButton: {

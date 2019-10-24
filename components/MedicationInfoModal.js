@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Overlay, Button, Image, Avatar, Card, Icon } from 'react-native-elements'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { BASE_URL } from '../redux/actions/WorkingURL'
 import { setUserMedication } from '../redux/actions/user.actions'
@@ -18,6 +18,25 @@ class MedicationInfoModal extends Component{
     }
   }
 
+  alertOnDelete = (medication) => {
+    Alert.alert(
+      'Delete Medication',
+      `Would you like to delete ${medication.name}?`,
+      [
+        {text: 'Delete', 
+        onPress: () => this.handleDeleteMedicationInfo(medication),
+        style: 'destructive'
+        },
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        }
+      ],
+      {cancelable: true},
+    );
+  }
+
   showMedicationImage = () => {
     console.log(this.props.medication)
     return this.props.medication.img_uri == ""? null : 
@@ -30,7 +49,7 @@ class MedicationInfoModal extends Component{
     />
   }
   
-  handleDeleteMedicationInfo = () => {
+  handleDeleteMedicationInfo = (medication) => {
     this.props.onToggle()
     fetch(BASE_URL+"/delete-medication", {
         method: "POST",
@@ -40,7 +59,7 @@ class MedicationInfoModal extends Component{
         },
         body: JSON.stringify({
             userID: this.props.user.id,
-            medication: this.props.medication
+            medication: medication
         })
     })
     .then(response => response.json())
@@ -84,7 +103,7 @@ class MedicationInfoModal extends Component{
     <Text 
     // style={{marginBottom: 10}}
     >
-      Remaining Dosages: {this.props.medication.remaining_doses}
+      Remaining Dosages: {this.props.medication.dosages_left}
     </Text>
     <Text>Remind me: {this.props.medication.repeat_time.toLowerCase()} time(s) {this.props.medication.repeat_days.toLowerCase()}</Text>
   </Card>
@@ -103,8 +122,8 @@ class MedicationInfoModal extends Component{
 
   showImage = () => {
     return this.state.showImage? 
-      <View> 
-      <Text>Tentative photo for your medication:</Text>
+      <View style={{marginBottom:35, marginTop:-20}}> 
+      <Text style={{fontSize:20}}>Tentative photo for your medication:</Text>
       <Image
       source={{ uri: this.state.photoData.uri }}
       style={{ width: 200, height: 200 }}/>
@@ -161,11 +180,14 @@ class MedicationInfoModal extends Component{
           {/* {this.showMedicationImage()} */}
           {this.showEnlargedImage()}
           {this.showCamera()}
-          <Button title={this.state.showCamera? "Hide Camera" : "Show Camera"} onPress={() => this.toggleCamera()}/>
+            <Button buttonStyle={{backgroundColor: '#ec700a'}} containerStyle={{marginHorizontal:10, marginBottom:40, marginTop:5}} title={this.state.showCamera? "Hide Camera" : "Show Camera"} onPress={() => this.toggleCamera()}/>
 
-          {this.showImage()}
+            {this.showImage()}
 
-          <Button title="Delete this Medication" onPress={this.handleDeleteMedicationInfo}/>
+          <View style={{position: 'absolute',
+          bottom: 5, left: 5, right: 5,}}>
+            <Button title="Delete this Medication" onPress={() => this.alertOnDelete(this.props.medication)}/>
+          </View>
       </Overlay>
     )
   }

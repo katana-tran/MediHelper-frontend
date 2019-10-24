@@ -1,6 +1,6 @@
-import { Card, Avatar, ListItem } from 'react-native-elements'
+import { Card, Avatar, ListItem, Text } from 'react-native-elements'
 import React, {Component} from 'react'
-import { View, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { BASE_URL } from '../redux/actions/WorkingURL'
 import { setUserMedication } from '../redux/actions/user.actions'
@@ -26,12 +26,15 @@ class ProfileCard extends Component{
 
     render(){
         return(
-            <Card title={ 
+            <Card 
+            containerStyle={styles.cardStyle}
+            title={ 
                 <ListItem
+                containerStyle={{marginTop: -5}}
                 leftAvatar={{
                     source: { uri: this.props.user.img_url }
                 }}
-                title={<Text h3>Hey, {this.props.user.name}</Text>}
+                title={<Text h2>Hey, {this.props.user.name.split(" ")[0]}</Text>}
                 />}>
             {
                 <View>
@@ -58,5 +61,15 @@ const mapStateToProps = state => {
       medications: state.UserReducer.usersMedications
     }
 }
+
+const styles = StyleSheet.create({
+    cardStyle: {
+        shadowOffset:{  width: 5,  height: 5,  },
+        shadowColor: '#474747',
+        shadowOpacity: 0.8,
+        borderRadius: 10,
+        marginTop: 10
+    }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileCard)

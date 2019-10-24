@@ -1,6 +1,6 @@
 import { Card, ListItem } from 'react-native-elements'
 import React, {Component} from 'react'
-import { View, Text, ScrollView, Alert } from 'react-native'
+import { View, Text, ScrollView, Alert, StyleSheet } from 'react-native'
 import TouchableScale from 'react-native-touchable-scale'
 import { connect } from 'react-redux'
 import { setUserMedication } from '../redux/actions/user.actions'
@@ -9,20 +9,24 @@ import { BASE_URL } from '../redux/actions/WorkingURL'
 class MedicationReminderContainer extends Component{
     
     updateDosage = (medication) => {
-      console.log(medication)
-      fetch(BASE_URL+ '/update-medication-dosage', {
-        method: "POST",
-        headers: {
-            "Content-Type":"application/json"
-        },
-        body: JSON.stringify({
-            user_id: this.props.user.id,
-            medication: medication
+      if (medication.dosages_left === 0 || medication.dosages_left === "0") {
+        alert("You have no dosages left to take, please refill.")
+      } else {
+          console.log(medication)
+          fetch(BASE_URL+ '/update-medication-dosage', {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                user_id: this.props.user.id,
+                medication: medication
+            })
         })
-    })
-    .then(res => res.json())
-    .then(user_medications => this.props.setUserMedication(user_medications))
-    .catch(err => console.log("Error in medication reminder:", err))
+        .then(res => res.json())
+        .then(user_medications => this.props.setUserMedication(user_medications))
+        .catch(err => console.log("Error in medication reminder:", err))
+      }
     }
 
     alertDosageChange = (medication) => {
@@ -50,6 +54,7 @@ class MedicationReminderContainer extends Component{
             {
                 this.props.usersMedications.map((medication, i) => (
                 <ListItem
+                containerStyle={styles.cardStyle}
                 onPress={() => this.alertDosageChange(medication)}
                 key={i}
                 Component={TouchableScale}
@@ -94,6 +99,17 @@ const mapDispatchToProps = dispatch => {
     setUserMedication: user_medications => dispatch(setUserMedication(user_medications))
   }
 }
+
+const styles = StyleSheet.create({
+  cardStyle: {
+      shadowOffset:{  width: 5,  height: 5,  },
+      shadowColor: '#474747',
+      shadowOpacity: 0.8,
+      borderRadius: 10,
+      marginTop: 8
+  }
+})
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MedicationReminderContainer)
