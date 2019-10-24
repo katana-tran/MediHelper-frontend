@@ -1,17 +1,16 @@
 import React from 'react';
-import { Text, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import MedicationsContainer from '../containers/MedicationsContainer';
+import { Text } from 'react-native-elements'
 import ContraindicationButton from '../components/ContraindicationButton'
 import ContraindicationsContainer from '../containers/ContraindicationsContainer';
 
 export default function ManageMedicationScreen() {
   return (
-    <ScrollView style={styles.container}>
-        <Text>My Medications</Text>
+    <View>
+        <Text h3 style={styles.title}>My Medications</Text>
         <MedicationsContainer/>
-        <ContraindicationButton/>
-        <ContraindicationsContainer/>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -25,4 +24,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  title: {
+    textAlign: 'center'
+  }
 });

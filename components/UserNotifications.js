@@ -59,6 +59,7 @@ class UserNotifications extends React.Component {
   };
 
   componentDidMount() {
+    // Notifications.cancelAllScheduledNotificationsAsync()
     let myDate = new Date()
     console.log(myDate.toLocaleString())
     this.registerForPushNotificationsAsync();
@@ -69,6 +70,7 @@ class UserNotifications extends React.Component {
   }
 
   _handleNotification = notification => {
+    console.log(notification, new Date())
     this.setState({ notification: notification });
   };
 

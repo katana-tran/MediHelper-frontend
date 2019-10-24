@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { TextInput, TouchableOpacity, Text, View, StyleSheet, Keyboard} from 'react-native';
+import { SearchBar, Input } from 'react-native-elements'
+import { TextInput, TouchableHighlight, Text, View, StyleSheet, Keyboard} from 'react-native';
 import { setMedicationSearch } from '../redux/actions/medication.actions'
+import { AntDesign } from '@expo/vector-icons'
 import { BASE_URL } from '../redux/actions/WorkingURL'
 
 class SearchBox extends Component {
@@ -45,7 +47,11 @@ class SearchBox extends Component {
     render(){
         return(
             <View>
-                <TextInput
+                <Input
+                leftIcon={<AntDesign
+                    name="search1"
+                    size={18}
+                  />}
                 autoCapitalize="none" 
                 onBlur={Keyboard.dismiss}
                 onChangeText={text => this.handleTextChange(text)}
@@ -53,12 +59,12 @@ class SearchBox extends Component {
                 placeholder="Search for a new medication" 
                 style={styles.input}
                 />   
-                <TouchableOpacity
+                <TouchableHighlight
                 style={styles.saveButton}
                 onPress={this.handleSubmit}
                 >
                 <Text style={styles.saveButtonText}>Go!</Text>
-                </TouchableOpacity>
+                </TouchableHighlight>
             </View>
         )
     }
@@ -85,6 +91,9 @@ const styles = StyleSheet.create({
         padding: 2,
         margin: 10
         },
+    container: {
+        borderWidth: 1
+    },
     saveButtonText: {
         color: 'white',
         fontSize: 20,

@@ -19,10 +19,14 @@ export function configPushNotification(medicationObject, USER_TOKEN, offsetTime,
         repeat: repeatFrequency
     }
 
-    Notifications.scheduleLocalNotificationAsync(message, scheduling) 
+    Notifications.scheduleLocalNotificationAsync(message, scheduling)
+    // notificationId.then(id => {
+    //     console.log("config", id)
+    //     return id
+    // }) 
 };
 
-export function calculateAmountOfNotifications(medicationObject, USER_TOKEN, startDate, repeatTime, repeatDays) {
+export async function calculateAmountOfNotifications(medicationObject, USER_TOKEN, startDate, repeatTime, repeatDays) {
 
     console.log(medicationObject, USER_TOKEN, startDate, repeatTime, repeatDays)
 
@@ -69,24 +73,32 @@ export function calculateAmountOfNotifications(medicationObject, USER_TOKEN, sta
     // Format of notification:
     // configPushNotification(medicationObject, USER_TOKEN, offsetTime,startDate, repeatFrequency)
 
+    // let notificationNumbers = []
+
     let createdNotificationsCounter = 0
     while(createdNotificationsCounter < notificationsToBeScheduled){
         console.log("created notification", createdNotificationsCounter)
         if (timeOffset !== "none") {
             let offsetTimeCalculated =  timeOffset*createdNotificationsCounter
             configPushNotification(medicationObject, USER_TOKEN, offsetTimeCalculated, startDate, repeatInterval)
+            // debugger
+            // notificationNumbers.push(notificationId)
         } else {
             configPushNotification(medicationObject, USER_TOKEN, 0,startDate, repeatInterval)
+            // debugger
+            // notificationNumbers.push(notificationId)
         }
         createdNotificationsCounter++
     }
     
     // Sending an initial message to let the user know they now have notifications for this medication!
-    confirmationNotification(medicationObject, USER_TOKEN, repeatTime, repeatInterval)
+    confirmationNotification(medicationObject, USER_TOKEN, repeatTime, repeatInterval, timeOffset)
+    
+    // console.log(notificationNumbers)
 
 }
 
-export function confirmationNotification(medicationObject, USER_TOKEN, repeatTime, repeatInterval) {
+export function confirmationNotification(medicationObject, USER_TOKEN, repeatTime, repeatInterval,timeOffset) {
     console.log("Initial confirmation", medicationObject, USER_TOKEN, repeatTime, repeatInterval)
         const message = {
         to: USER_TOKEN,
@@ -95,7 +107,8 @@ export function confirmationNotification(medicationObject, USER_TOKEN, repeatTim
             sound: "true"
         },
         title: `Notifications Started for ${medicationObject.name}`,
-        body: `You've signed up to receive ${repeatTime.toLowerCase()} notification(s) per ${repeatInterval} for this medication.`
+        body: `You've signed up to receive ${repeatTime.toLowerCase()} notification(s) per ${repeatInterval} for this medication.`,
+        data: { offset: timeOffset},
         }
 
         const scheduling = {

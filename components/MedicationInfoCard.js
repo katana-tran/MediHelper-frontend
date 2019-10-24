@@ -40,7 +40,9 @@ class MedicationInfoCard extends Component{
                 raised={true}
                 icon={<MaterialCommunityIcons color="orange" name="pill"/>}
                 />
-                <Text>{this.props.medication.name}</Text>
+                <Text
+                style={{marginLeft: 5, marginTop: 5}}>
+                {this.props.medication.name}</Text>
             </View>
             </>
         )
@@ -50,7 +52,8 @@ class MedicationInfoCard extends Component{
 const styles = StyleSheet.create({
     view: {
         flex:1,
-        flexDirection:'row'
+        flexDirection:'row',
+        marginBottom: 5
     },
     medicationButton: {
         borderWidth: 1,

@@ -20,11 +20,11 @@ class ContraindicationCard extends Component{
     }
 
     render(){
-        const { contraindication, firstDrug, secondDrug, severity} = this.props.contraindication
+        const { contraindication, firstDrug, secondDrug } = this.props.contraindication
         return(
             <>
             <Tooltip height={100} width={300} backgroundColor={this.state.color} popover={<Text>{contraindication}</Text>}>
-                <View style={styles.view}>
+                <View>
                     <MaterialCommunityIcons color={this.state.color}name="pill"/>
                     <Text>{firstDrug.name} and {secondDrug.name}</Text>
                 </View>

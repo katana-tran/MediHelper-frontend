@@ -2,28 +2,23 @@ import { Card, ListItem } from 'react-native-elements'
 import React, {Component} from 'react'
 import { View, Text } from 'react-native'
 import TouchableScale from 'react-native-touchable-scale'
+import { connect } from 'react-redux'
+import { setUserMedication } from '../redux/actions/user.actions'
+import { medicationPlaceholder } from '../assets/images/medication_placeholder.jpg'
 
 class MedicationReminderContainer extends Component{
     
-    render(){
-        const list = [
-            {
-              name: 'Reminder 1',
-              avatar_url: 'https://www.strata.com/wp-content/uploads/2017/06/Prescription-container-1.png',
-              subtitle: 'Taken once a week: Monday'
-            },
-            {
-              name: 'Medication 2',
-              avatar_url: 'https://previews.123rf.com/images/72soul/72soul1202/72soul120200111/12739944-illustration-depicting-a-single-medication-container-with-the-words-brighter-future-tablets-on-the-f.jpg',
-              subtitle: 'Taken every 4 hours'
-            }
-          ]
+    updateDosage = () => {
 
+    }
+
+    render(){
         return(
             <View>
             {
-                list.map((l, i) => (
+                this.props.usersMedications.map((medication, i) => (
                 <ListItem
+                onPress={this.updateDosage}
                 key={i}
                 Component={TouchableScale}
                 friction={90} //
@@ -34,11 +29,13 @@ class MedicationReminderContainer extends Component{
                   start: [1, 0],
                   end: [0.2, 0],
                 }}
-                leftAvatar={{ rounded: true, source: {uri: l.avatar_url}}}
-                title={l.name}
+                leftAvatar={{ rounded: true, source: medication.img_uri === ""? {uri: "https://www.dosepharmacy.com/media/catalog/product/cache/1/small_image/300x300/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/Placeholder_1.jpg"} : {uri: medication.img_uri}
+              
+              }}
+                title={medication.name}
                 titleStyle={{ color: 'white', fontWeight: 'bold' }}
                 subtitleStyle={{ color: 'white' }}
-                subtitle={l.subtitle}
+                subtitle={`Dosages Remaining: ${medication.dosages_left}`}
                 chevron={{ color: 'white' }}
                     // key={i}
                     // leftAvatar={{ source: { uri: l.avatar_url } }}
@@ -53,4 +50,18 @@ class MedicationReminderContainer extends Component{
     }
 }
 
-export default MedicationReminderContainer
+const mapStateToProps = state => {
+  return {
+    user: state.UserReducer.user,
+    usersMedications: state.UserReducer.usersMedications
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setUserMedication: user_medications => dispatch(setUserMedication(user_medications))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MedicationReminderContainer)

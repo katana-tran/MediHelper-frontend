@@ -11,7 +11,7 @@ class MedicationModal extends Component{
   constructor(){
     super()
     this.state = {
-      dosesRemaining: "",
+      amountRemaining: "",
       amountUsedPerDose: "",
       notificationStartDate: new Date(new Date().getTime() + 3600000),
       repeatIntervalTime: "One",
@@ -21,15 +21,22 @@ class MedicationModal extends Component{
     }
   }
 
+  screenMedicationsForInput = () => {
+    this.state.amountRemaining !== "" && this.state.amountUsedPerDose !== ""? this.screenMedicationsForDuplicates() : alert("You have not completely filled above form!")
+  }
+
   screenMedicationsForDuplicates = () => {
     let duplicationArray = this.props.usersMedications.map((medication) => {
       return medication.name === this.props.medication.name? true : false
     })
-    duplicationArray.includes(true)? alert("You've already added this medication.") : this.handleMedicationInfo
+    duplicationArray.includes(true)? alert("You've already added this medication.") : this.handleMedicationInfo()
   }
 
   handleMedicationInfo = () => {
     this.props.onToggle()
+    userNotifications.calculateAmountOfNotifications(this.props.medication, this.props.user.token, this.state.notificationStartDate, this.state.repeatIntervalTime, this.state.repeatIntervalDays)
+
+    // console.log(notificationId)
     fetch(BASE_URL+"/medications", {
         method: "POST",
         headers: {
@@ -39,7 +46,7 @@ class MedicationModal extends Component{
         body: JSON.stringify({
             userID: this.props.user.id,
             medication: this.props.medication,
-            dosesRemaining: this.state.dosesRemaining,
+            amountRemaining: this.state.amountRemaining,
             amountUsedPerDose: this.state.amountUsedPerDose,
             notificationStartDate: this.state.notificationStartDate,
             repeatIntervalTime: this.state.repeatIntervalTime,
@@ -48,15 +55,14 @@ class MedicationModal extends Component{
     })
     .then(response => response.json())
     .then(user_medications => {
-      this.props.setUserMedication(user_medications)
-      userNotifications.calculateAmountOfNotifications(this.props.medication, this.props.user.token, this.state.notificationStartDate, this.state.repeatIntervalTime, this.state.repeatIntervalDays)
+      this.props.setUserMedication(user_medications) 
     })    
   }
 
-  handleDosesRemainingText = text => {
+  handleAmountRemainingText = text => {
     this.setState((prevState) => ({
       ...prevState,
-      dosesRemaining: text
+      amountRemaining: text
     }))
   }
 
@@ -192,14 +198,16 @@ class MedicationModal extends Component{
           <Text>Amount of capsules/applications/syringes remaining:</Text>
           <TextInput
               autoCapitalize="none" 
+              keyboardType='numeric'
               onBlur={Keyboard.dismiss}
-              onChangeText={text => this.handleDosesRemainingText(text)}
-              value={this.state.dosesRemaining} 
+              onChangeText={text => this.handleAmountRemainingText(text)}
+              value={this.state.amountRemaining} 
               placeholder="amount remaining" 
               style={styles.input}/>   
             
           <Text>Amount of capsules/applications/syringes per dose: </Text>
           <TextInput
+              keyboardType='numeric'
               autoCapitalize="none" 
               onBlur={Keyboard.dismiss}
               onChangeText={text => this.handleAmountPerDoseText(text)}
@@ -235,7 +243,7 @@ class MedicationModal extends Component{
             {this.showFrequencyPicker()}
          </View>
   
-            <Button title="Add to My Medications" onPress={this.screenMedicationsForDuplicates}/>  
+            <Button title="Add to My Medications" onPress={this.screenMedicationsForInput}/>  
       </Overlay>
     )
   }

@@ -7,14 +7,14 @@ import SearchToFilterContainer from '../containers/SearchToFilterContainer';
 export default function MedicationSearchScreen() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    <View style={{flex: 1}}>
-        <TextInput keyboardType='numeric'/>
-    <View style={styles.container}>
-            <SearchToFilterContainer/>
-            <SearchContainer/>
-    </View>
-    </View>
-</TouchableWithoutFeedback>
+      <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}>
+          <TextInput keyboardType='numeric'/>
+        <View style={styles.container}>
+          <SearchToFilterContainer/>
+          <SearchContainer/>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

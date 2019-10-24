@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Text, View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import { Card, Text } from 'react-native-elements'
 import AuthService from '../components/AuthService'
 
 class AuthScreen extends React.Component {
@@ -12,10 +13,12 @@ class AuthScreen extends React.Component {
 
     render(){
     return (
-        <View style={styles.container}>
-            <Text>Signin by Facebook</Text>
+      <View style={styles.container}>
+        <Card>
+            <Text h2 style={{fontFamily: 'Arial',}}>Signin by Facebook</Text>
             <AuthService signIn={this.signInAsync}/>
-        </View>
+        </Card>
+      </View>
     )}
 }
 
@@ -26,8 +29,9 @@ AuthScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 300,
-    backgroundColor: '#fff',
+    backgroundColor: '#005b96',
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
 });
 

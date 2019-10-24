@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
       box: {
         width: 300,
         height: 150,
-        backgroundColor: 'pink',
+        backgroundColor: '#005b96',
         borderWidth: 1,
-        borderColor: 'gray',
-        borderRadius: 20,
+        borderColor: 'white',
+        borderRadius: 5,
       },
     saveButton: {
         borderWidth: 1,

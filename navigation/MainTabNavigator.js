@@ -7,7 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import HomeScreen from '../screens/HomeScreen';
 import MedicationSearchScreen from '../screens/MedicationSearchScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import ContraindicationScreen from '../screens/ContraindicationScreen'
 import ManageMedicationScreen from '../screens/ManageMedicationScreen';
 import Colors from '../constants/Colors';
 
@@ -74,18 +74,18 @@ ManageMedicationStack.navigationOptions = {
 
 ManageMedicationStack.path = '';
 
-const ProfileStack = createStackNavigator(
+const ContraindicationStack = createStackNavigator(
   {
-    Profile: ProfileScreen,
+    Contraindication: ContraindicationScreen,
   },
   config
 );
 
-ProfileStack.navigationOptions = {
-  tabBarLabel: 'Profile',
+ContraindicationStack.navigationOptions = {
+  tabBarLabel: 'Conflicts',
   tabBarIcon: ({ focused }) => (
     <AntDesign
-    name="user"
+    name="warning"
     size={26}
     style={{ marginBottom: -3}}
     color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
@@ -93,13 +93,13 @@ ProfileStack.navigationOptions = {
   ),
 };
 
-ProfileStack.path = '';
+ContraindicationStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   MedicationSearchStack,
   ManageMedicationStack,
-  ProfileStack
+  ContraindicationStack
 });
 
 tabNavigator.path = '';

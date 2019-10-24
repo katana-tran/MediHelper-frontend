@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { TextInput, TouchableOpacity, Text, View, StyleSheet, Keyboard} from 'react-native';
+import { AntDesign } from '@expo/vector-icons'
+import { SearchBar, Input } from 'react-native-elements'
 import { setFilterTerm } from '../redux/actions/medication.actions'
 
 class SearchBox extends Component {
@@ -13,7 +15,12 @@ class SearchBox extends Component {
     render(){
         return(
             <View>
-                <TextInput
+                <Input
+                leftIcon={<AntDesign
+                    name="search1"
+                    size={18}
+                  />}
+                platform="ios"
                 autoCapitalize="none" 
                 onBlur={Keyboard.dismiss}
                 onChangeText={text => this.handleTextChange(text)}
