@@ -6,15 +6,10 @@ import SearchToFilterContainer from '../containers/SearchToFilterContainer';
 
 export default function MedicationSearchScreen() {
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}>
-          <TextInput keyboardType='numeric'/>
-        <View style={styles.container}>
+        <View onPress={Keyboard.dismiss} style={styles.container}>
           <SearchToFilterContainer/>
           <SearchContainer/>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
   );
 }
 
@@ -23,14 +18,9 @@ MedicationSearchScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-    },
     container: {
+      marginTop:8,
       flex: 1,
-      justifyContent: 'center',
       alignItems: 'center',
     },
   })

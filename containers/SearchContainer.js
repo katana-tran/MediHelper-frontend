@@ -42,12 +42,12 @@ class SearchContainer extends Component {
             <>
             {this.showResultsTag()}
             <View style={{backgroundColor:'white', flex:1}}>
-            <ScrollView 
-            directionalLockEnabled='true'
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}>   
-                {this.handleGenerateMedicationCards()}
-            </ScrollView>
+                <ScrollView 
+                directionalLockEnabled='true'
+                contentInsetAdjustmentBehavior="automatic"
+                style={styles.scrollView}>   
+                    {this.handleGenerateMedicationCards()}
+                </ScrollView>
             </View>
             </>
         )

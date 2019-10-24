@@ -6,7 +6,7 @@ import ContraindicationsContainer from '../containers/ContraindicationsContainer
 
 export default function ContraindicationScreen() {
   return (
-    <View>
+    <View style={styles.container}>
         <Text h3 style={styles.title}>Contraindications</Text>
         <Text style={styles.caution}>By clicking the button below, you recognize that these contraindications may not encompass all possible conflicts nor exclude non-hazardous conflicts. Please consult with your healthcare provider for further advice on your medication intake. </Text>
         <ContraindicationButton/>
@@ -22,7 +22,6 @@ ContraindicationScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#fff',
   },
   caution: {

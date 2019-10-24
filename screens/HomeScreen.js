@@ -29,11 +29,8 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <ProfileCard/>
         <UserNotifications/>
-      <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}>
+      
         <MedicationReminderContainer/>
-      </ScrollView>
       </View>
 
       <View style={styles.tabBarInfoContainer}>

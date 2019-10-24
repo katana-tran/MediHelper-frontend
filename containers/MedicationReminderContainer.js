@@ -1,24 +1,56 @@
 import { Card, ListItem } from 'react-native-elements'
 import React, {Component} from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView, Alert } from 'react-native'
 import TouchableScale from 'react-native-touchable-scale'
 import { connect } from 'react-redux'
 import { setUserMedication } from '../redux/actions/user.actions'
-import { medicationPlaceholder } from '../assets/images/medication_placeholder.jpg'
+import { BASE_URL } from '../redux/actions/WorkingURL'
 
 class MedicationReminderContainer extends Component{
     
-    updateDosage = () => {
+    updateDosage = (medication) => {
+      console.log(medication)
+      fetch(BASE_URL+ '/update-medication-dosage', {
+        method: "POST",
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+            user_id: this.props.user.id,
+            medication: medication
+        })
+    })
+    .then(res => res.json())
+    .then(user_medications => this.props.setUserMedication(user_medications))
+    .catch(err => console.log("Error in medication reminder:", err))
+    }
 
+    alertDosageChange = (medication) => {
+      Alert.alert(
+        'Take Medication',
+        `Would you like to take ${medication.name} now?`,
+        [
+          {text: 'Take now', 
+           onPress: () => this.updateDosage(medication),
+           style: 'default'
+          },
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          }
+        ],
+        {cancelable: true},
+      );
     }
 
     render(){
         return(
-            <View>
+            <ScrollView style={{marginHorizontal:15, marginTop: 5}}>
             {
                 this.props.usersMedications.map((medication, i) => (
                 <ListItem
-                onPress={this.updateDosage}
+                onPress={() => this.alertDosageChange(medication)}
                 key={i}
                 Component={TouchableScale}
                 friction={90} //
@@ -45,7 +77,7 @@ class MedicationReminderContainer extends Component{
                 />
                 ))
             }
-            </View>
+            </ScrollView>
         )
     }
 }

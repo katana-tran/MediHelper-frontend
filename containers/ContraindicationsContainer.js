@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ContraindicationCard from '../components/ContraindicationCard'
-import { Text, View, ScrollView, StyleSheet } from 'react-native'
+import { Text, View, ScrollView, StyleSheet, SafeAreaView } from 'react-native'
 
 
 class ContraindicationsContainer extends Component {
@@ -34,17 +34,14 @@ class ContraindicationsContainer extends Component {
 
     render () {
         return(
-            <View>
-                {this.showText()}
-            <ScrollView style={styles.ScrollView}>
-                {this.createContraindicationCards()}
-                <View>
-                </View>
-            </ScrollView>
-            </View>
+                <ScrollView style={styles.scrollView}>
+                    {this.createContraindicationCards()}
+                </ScrollView>
         )
     }
 }
+
+// {this.showText()}
 
 const mapStateToProps = state => {
     return {
@@ -53,10 +50,15 @@ const mapStateToProps = state => {
 }
 
 const styles = StyleSheet.create({
-    ScrollView: {
+    // ScrollView: {
+    //     
+    //     marginLeft: 5,
+    //     marginRight: 5
+    // },
+
+    scrollView: {
         marginTop: 10,
-        marginLeft: 5,
-        marginRight: 5
+        marginHorizontal: 10,
     },
 });
 
